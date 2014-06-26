@@ -20,7 +20,7 @@ func StartCollector(connect *fluxConnect.FluxConnect, addr *string, port *uint16
 	client.DisableCompression()
 
 	if err != nil {
-		fmt.Println("Error creating Influx client: ", err)
+		fmt.Println("Error creating Influx client:", err)
 		return
 	}
 
@@ -42,7 +42,9 @@ func StartCollector(connect *fluxConnect.FluxConnect, addr *string, port *uint16
 				}
 
 				// Write the data to the Influx DB with time precision in seconds
-				if err := client.WriteSeriesWithTimePrecision([]*influxdb.Series{series}, "s"); err != nil {
+				err := client.WriteSeriesWithTimePrecision([]*influxdb.Series{series}, "s")
+
+				if err != nil {
 					fmt.Println("Error while writing data:", err)
 				}
 			case <-done:

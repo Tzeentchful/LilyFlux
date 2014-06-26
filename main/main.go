@@ -82,7 +82,7 @@ func main() {
 				closeAll()
 				return
 			} else if str == "help" {
-				fmt.Println("LilyPad Proxy - Help")
+				fmt.Println("LilyFlux- Help")
 				fmt.Println("reload - Reloads the proxy.yml")
 				fmt.Println("debug  - Prints out CPU, Memory, and Routine stats")
 				fmt.Println("stop   - Stops the process. (Aliases: 'exit', 'halt')")

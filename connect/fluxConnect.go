@@ -21,7 +21,7 @@ func NewFluxConnect(addr *string, user *string, pass *string, done chan bool) (c
 		ServersMutex: &sync.RWMutex{},
 	}
 
-	// Initialize the connect object on before we connect
+	// Initialize the connect object before we connect
 	client.RegisterEvent("preconnect", func(event clientConnect.Event) {
 		if len(connect.Servers) > 0 {
 			connect.ServersMutex.Lock()
@@ -35,7 +35,7 @@ func NewFluxConnect(addr *string, user *string, pass *string, done chan bool) (c
 	clientConnect.AutoAuthenticate(client, user, pass)
 	go clientConnect.AutoConnect(client, addr, done)
 
-	// Start collecing the player count of the cluster ever second
+	// Start collecing the player count of the cluster every second
 	go func() {
 		ticker := time.NewTicker(1 * time.Second)
 		for {
